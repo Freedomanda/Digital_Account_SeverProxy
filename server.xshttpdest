@@ -1,0 +1,10 @@
+description = "github api httpS connection";
+host = "wecf78549b63.cn1.hana.ondemand.com";
+port = 443;
+//pathPrefix = "/wechat/v1/accounts/8/messages";
+//proxyType = http;
+//proxyHost = "proxy.wdf.sap.corp";
+//proxyPort = 8080;
+authType = none;
+//useSSL = true;
+timeout = 0; 
