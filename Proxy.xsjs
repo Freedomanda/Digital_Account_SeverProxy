@@ -29,40 +29,27 @@ function processRequest() {
 
 					var messages = [];
 					var idmin = 0;
-					var connget = $.db.getConnection("Chunge::request");
+					var connget = $.db.getConnection("DigitalAccount::request");
 					connget.prepareStatement("SET SCHEMA " + "\"CWU\"").execute(); // Setting the SCHEMA
 
 					var pStmtget = connget.prepareStatement('select "id", "createdTime", "content" ,"header" , "digaccid" from ' +
-						"\"Chunge.data::DigAccMessage.Message\""); //+ 'limit 1');
+						"\"DigitalAccount.data::DigAccMessage.DAMessage\""); //+ 'limit 1');
 					var rsget = pStmtget.executeQuery();
 
 					while (rsget.next()) {
 						idmin = Number(rsget.getNString(1));
 						messages.push({
-							//id: rsget.getInteger(1),
-							//createdTime: rsget.getTimestamp(2),
 							content: rsget.getNString(3),
 							header: rsget.getNString(4),
 							digaccid: rsget.getNString(5)
 						});
-						var pStmtdel = connget.prepareStatement('delete from ' + "\"Chunge.data::DigAccMessage.Message\"" + 'where "id" = ' + idmin);
+						var pStmtdel = connget.prepareStatement('delete from ' + "\"DigitalAccount.data::DigAccMessage.DAMessage\"" + 'where "id" = ' + idmin);
 						var rsdel = pStmtdel.executeUpdate();
 						connget.commit();
-						//            if (connget) {
-						//                            connget.close();
-						//            }
 					}
-					// rsget.close();
 
 					$.response.status = $.net.http.OK;
 					$.response.setBody(JSON.stringify(messages));
-
-					//            var pStmtdel = connget.prepareStatement('delete from ' + "\"ericlinepackage.data::DigAccMessage.Message\"" + 'where "id" = ' + idmin );
-					//            var rsdel = pStmtdel.executeUpdate();
-					//     connget.commit();
-					//            if (connget) {
-					//                            connget.close();
-					//            }
 					break;
 					//            //Handle your POST calls here
 				case $.net.http.DEL:

@@ -1,4 +1,4 @@
-namespace "Chunge".data;
+namespace "DigitalAccount".data;
 
 @Schema: 'CWU'
 context DigAccMessage {
@@ -7,7 +7,7 @@ context DigAccMessage {
 	type Header: String(5000);
 	type Digaccid: String(5000);
 	
-	entity Message {
+	entity DAMessage {
 		key id : Integer; 
 		createdTime: UTCTimestamp;
 		content: Content;

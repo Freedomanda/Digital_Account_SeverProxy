@@ -61,18 +61,18 @@ function processRequest() { $.trace.error('1');
                     
 					var id = 0;
 					$.trace.error(bodystr);
-					var connpost = $.db.getConnection("Chunge::request"); // Create Connection used SQL Connection
+					var connpost = $.db.getConnection("DigitalAccount::request"); // Create Connection used SQL Connection
 					$.trace.error('b');
 					connpost.prepareStatement("SET SCHEMA " + "\"CWU\"").execute(); // Setting the SCHEMA
                     $.trace.error('2');
-					var pStmtpost = connpost.prepareStatement("select max( \"id\" ) from " + "\"Chunge.data::DigAccMessage.Message\"");
+					var pStmtpost = connpost.prepareStatement("select max( \"id\" ) from " + "\"DigitalAccount.data::DigAccMessage.DAMessage\"");
 					var rspost = pStmtpost.executeQuery();
 					if (rspost.next()) {
 						id = Number(rspost.getNString(1)) + 1;
 					}
 					rspost.close();
                     $.trace.error('3');
-					pStmtpost = connpost.prepareStatement("insert INTO " + "\"Chunge.data::DigAccMessage.Message\"" +
+					pStmtpost = connpost.prepareStatement("insert INTO " + "\"DigitalAccount.data::DigAccMessage.DAMessage\"" +
 						'("id", "createdTime", "content" ,"digaccid" ) values(?, now(), ? , ?)');
 					pStmtpost.setInteger(1, id);
 					pStmtpost.setNString(2, bodystr);
