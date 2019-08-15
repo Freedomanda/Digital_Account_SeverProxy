@@ -9,7 +9,7 @@
     "force_ssl": true,
     "enable_etags": true,
     "prevent_xsrf": false,
-    "anonymous_connection": "Chunge::request",
+    "anonymous_connection": "DigitalAccount::request",
     "cors": [{
         "enabled": true
     }],
